@@ -104,18 +104,7 @@ class AlgoritmoGenetico:
                 escolhidos_procriar.append(self.populacao[int(random.uniform(0, self.tamanho_populacao-1))]['Cromossomo'])
 
         elif (self.tipo_selecao == 'roleta_prob'):
-            soma = self.populacao['Fitness'].sum()
-            for i in range(self.quantidade_selecao):
-                prob = random.uniform(0, 1)
-                contador = 0
-                for ind, fit in enumerate(self.populacao['Fitness']):
-                    contador += fit/soma
-                    #print(f'Contador {contador} soma {soma}')
-                    if contador >= prob:
-                        print(i)
-                        escolhidos_procriar.append(self.populacao.iloc[ind]['Cromossomo'])
-                        break
-                    #TODO: Problemas aqui!                
+            escolhidos_procriar = random.choices(self.populacao['Cromossomo'], self.populacao['Fitness'], self.quantidade_selecao)            
 
 
         elif (self.tipo_selecao == 'classificacao'):
